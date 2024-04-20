@@ -7,7 +7,9 @@ $ make install
 
 ## Compile the program
 ```bash=
-$ make -j
+$   make
+$   make VERBOSE=1 # show all compile details
+$   make -j        # parallel compiling
 ```
 
 ### TODO
