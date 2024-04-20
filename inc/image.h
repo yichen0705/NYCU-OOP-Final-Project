@@ -3,10 +3,8 @@
 
 #include <iostream>
 #include <string.h>
-#define cimg_use_jpeg
-#include "CImg.h"
+#include <data_loader.h>
 
-using namespace cimg_library;
 using namespace std;
 
 class Image{
