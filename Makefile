@@ -1,8 +1,9 @@
 # ompiler & Linker settings
 CC = g++
 #CFLAGS = -g -Wall -march=native -flto -funroll-loops -finline-functions -ffast-math -std=c++11 -pthread -O3 -DNDEBUG -I./inc
-CFLAGS = -g -Wall -I ./inc -I ./third-party/CImg -std=c++11
-LINKER = -L/usr/X11R6/lib -lm -lpthread -lX11 
+#CFLAGS = -g -Wall -I ./inc -I ./third-party/CImg -I /home/course/2024OOP/2024OOPTA/libjpeg -std=c++11 
+CFLAGS = -g -Wall -I ./inc -I ./third-party/CImg -I ./third-party/libjpeg -std=c++11 
+LINKER = -L/usr/X11R6/lib -lm -lpthread -lX11 -L./third-party/libjpeg -ljpeg
 
 
 # Valgrind for memory issue

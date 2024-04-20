@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <string.h>
+#define cimg_use_jpeg
 #include "CImg.h"
 
 using namespace cimg_library;
