@@ -30,6 +30,10 @@ $(TARGET): $(OBJS)
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
 	$(CC) $(CFLAGS) -c $< -o $@ $(LINKER)
 
+install:
+	chmod +x scripts/clone_env.sh  
+	./scripts/clone_env.sh  
+
 check:
 	$(CHECKCC) $(CHECKFLAGS) ./$(TARGET) testcase/case7.sp testcase/s4.rpt
 

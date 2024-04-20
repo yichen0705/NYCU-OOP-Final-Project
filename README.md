@@ -1,3 +1,11 @@
 # NYCU-OOP-Final-Project
 
-Thanks to CImg : [https://github.com/GreycLab/CImg]
+# Install CImg & libjpeg
+```bash=
+$ make install
+```
+
+# Compile the program
+```bash=
+$ make -j
+```
