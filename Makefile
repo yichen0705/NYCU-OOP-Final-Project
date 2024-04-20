@@ -33,9 +33,9 @@ all: $(TARGET)
 $(OBJDIR):
 	@mkdir $(OBJDIR)
 
-$(TARGET): $(OBJS) $(OBJDIR)/data_loader.o
+$(TARGET): main.cpp $(OBJS) $(OBJDIR)/data_loader.o
 	$(VECHO) "	LD\t$@\n"
-	$(Q)$(CC) $(CFLAGS) main.cpp $^ -o $@ $(LINKER)
+	$(Q)$(CC) $(CFLAGS) $^ -o $@ $(LINKER)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
 	$(VECHO) "	CC\t$@\n"
