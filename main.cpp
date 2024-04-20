@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char *argv[]){
     Image *img1 = new GrayImage();
-    img1->LoadImage("Image-Folder/lena.jpg");
+    img1->LoadImage("Image-Folder/testSet/testSet/img_18.jpg");
 
     return 0;
 }

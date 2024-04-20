@@ -10,24 +10,33 @@ Data_Loader::~Data_Loader(){
 }
 
 void Data_Loader::Load_Gray(string filename, int *w, int *h, int **pixels){
-    CImg<unsigned char> image(filename.c_str());
+    CImg<unsigned char> img(filename.c_str());
 
-    // Get image dimensions
-    *w = image.width();
-    *h = image.height();
+    // Get width, height, number of channels
+    int _w=img.width();
+    int _h=img.height();
+    int _c=img.spectrum();
+    cout << "Dimensions: " << _w << "x" << _h << " " << _c << " channels" <<endl;
 
-    // Allocate memory for 2D array
-    pixels = new int *[image.height()];
-    for (int i = 0; i < image.height(); ++i) {
-        pixels[i] = new int[image.width()];
+    // Dump all pixels
+    for(int y=0;y<_h;y++){
+       for(int x=0;x<_w;x++){
+          cout << y << "," << x << " " << (int)img(x,y) << endl;
+       }
     }
 
-    cimg_forXY(image, x, y) {
-        pixels[y][x] = image(x, y, 0, 0);
+    for(int y=0;y<_h;y++){
+       for(int x=0;x<_w;x++){
+          if(img(x,y) > 127){
+            cout << "@@";
+          }
+          else cout << "__";
+       }
+       cout << endl;
     }
 
     // Display the loaded image
-    CImgDisplay disp(image, "Loaded Image");
+    CImgDisplay disp(img, "Loaded Image");
     while (!disp.is_closed()) {
         disp.wait();
     }
