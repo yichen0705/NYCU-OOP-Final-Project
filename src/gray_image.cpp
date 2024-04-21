@@ -1,7 +1,10 @@
 #include "gray_image.h"
 
+// Initialize the static Data_Loader object
+Data_Loader GrayImage::data_loader(0);
+
 GrayImage::GrayImage() : Image(0, 0){
-    ;
+    pixels =  nullptr;
 }
 
 GrayImage::GrayImage(int w, int h, int **pixels) : Image(w, h){
@@ -18,16 +21,7 @@ GrayImage::~GrayImage(){
 
 void GrayImage::LoadImage(string filename){
     int **pixels = nullptr;
-    Data_Loader data_loader;
     pixels = data_loader.Load_Gray(filename, &w, &h);
-
-    for(int i=0;i<h;i++){
-       for(int j=0;j<w;j++){
-          if(pixels[i][j] > 127){
-            cout << "@@";
-          }
-          else cout << "__";
-       }
-       cout << endl;
-    }
+    data_loader.Display_Gray(w, h, pixels);
+    data_loader.Display_Gray_ASCII(w, h, pixels);
 }

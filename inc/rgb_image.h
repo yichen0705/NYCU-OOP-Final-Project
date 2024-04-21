@@ -8,10 +8,13 @@
 class RGBImage : public Image{
 private:
     RGB_pixel **pixels;
+    static Data_Loader data_loader;
 
 public:
+    RGBImage();
     RGBImage(int w, int h, RGB_pixel **pixels);
     ~RGBImage();
+    void LoadImage(string filename);
 };
 
 #endif
