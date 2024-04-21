@@ -7,9 +7,9 @@
 #include <string>
 
 // for luminance formula: Y = 0.2126R + 0.7152G + 0.0722B
-#define R_FACTOR 0.333
-#define G_FACTOR 0.333
-#define B_FACTOR 0.333
+#define R_FACTOR 0.2126
+#define G_FACTOR 0.7152
+#define B_FACTOR 0.0722
 
 using namespace std;
 using namespace cimg_library;
