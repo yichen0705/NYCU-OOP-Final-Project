@@ -4,7 +4,7 @@
 #include <iostream>
 #include <string.h>
 #include <data_loader.h>
-
+#define q
 using namespace std;
 
 class Image{

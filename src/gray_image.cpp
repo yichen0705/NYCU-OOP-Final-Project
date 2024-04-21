@@ -19,5 +19,15 @@ GrayImage::~GrayImage(){
 void GrayImage::LoadImage(string filename){
     int **pixels = nullptr;
     Data_Loader data_loader;
-    data_loader.Load_Gray(filename, &w, &h, pixels);
+    pixels = data_loader.Load_Gray(filename, &w, &h);
+
+    for(int i=0;i<h;i++){
+       for(int j=0;j<w;j++){
+          if(pixels[i][j] > 127){
+            cout << "@@";
+          }
+          else cout << "__";
+       }
+       cout << endl;
+    }
 }

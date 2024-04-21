@@ -1,8 +1,7 @@
 # ompiler & Linker settings
-CC = g++
-#CFLAGS = -g -Wall -march=native -flto -funroll-loops -finline-functions -ffast-math -std=c++11 -pthread -O3 -DNDEBUG -I./inc
-#CFLAGS = -g -Wall -I ./inc -I ./third-party/CImg -I /home/course/2024OOP/2024OOPTA/libjpeg -std=c++11 
-CFLAGS = -g -Wall -I ./inc -I ./third-party/CImg -I ./third-party/libjpeg -I ./Data-Loader -std=c++11 
+CXX = g++
+CXXFLAGS = -I ./inc -I ./third-party/CImg -I ./third-party/libjpeg -I ./Data-Loader -std=c++11
+WARNINGS = -g -Wall
 LINKER = -L/usr/X11R6/lib -lm -lpthread -lX11 -L./third-party/libjpeg -ljpeg
 
 
@@ -13,8 +12,10 @@ CHECKFLAGS = --leak-check=full -s --show-leak-kinds=all --track-origins=yes
 # Source files and object files
 SRCDIR = src
 OBJDIR = obj
+INCDIR = inc
 SRCS = $(wildcard $(SRCDIR)/*.cpp)
 OBJS = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.o,$(SRCS))
+DEPS = $(patsubst $(SRCDIR)/%.cpp,$(OBJDIR)/%.d,$(SRCS))
 
 # Control the build verbosity
 ifeq ("$(VERBOSE)","1")
@@ -24,6 +25,8 @@ else
     Q := @
     VECHO = @printf
 endif
+
+.PHONY: all install check clean
 
 # Name of the executable
 TARGET = Image_Processing
@@ -35,15 +38,21 @@ $(OBJDIR):
 
 $(TARGET): main.cpp $(OBJS) $(OBJDIR)/data_loader.o
 	$(VECHO) "	LD\t$@\n"
-	$(Q)$(CC) $(CFLAGS) $^ -o $@ $(LINKER)
+	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $^ -o $@ $(LINKER)
 
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR)
+# make makefile depends on the Makefile as well, ensure changes in makefile will trigger recompilation
+$(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR) $(INCDIR)/%.h Makefile
 	$(VECHO) "	CC\t$@\n"
-	$(Q)$(CC) $(CFLAGS) -c $< -o $@
+	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) -MMD -c $< -o $@
 
-$(OBJDIR)/data_loader.o: ./Data-Loader/data_loader.cpp 
+$(OBJDIR)/%.d: $(SRCDIR)/%.cpp | $(OBJDIR) $(INCDIR)/%.h Makefile
+	@$(CXX) $(CXXFLAGS) -M $< | sed 's|\($*\)\.o[ :]*|$(OBJDIR)/\1.o $(OBJDIR)/\1.d : |g' > $@
+
+-include $(DEPS)
+
+$(OBJDIR)/data_loader.o: ./Data-Loader/data_loader.cpp ./Data-Loader/data_loader.h
 	$(VECHO) "	CC\t$@\n"
-	$(Q)$(CC) $(CFLAGS) -c $< -o $@
+	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) -c $< -o $@
 
 install:
 	chmod +x scripts/clone_env.sh  
