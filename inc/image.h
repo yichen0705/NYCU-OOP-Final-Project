@@ -11,6 +11,7 @@ class Image{
 protected:
     int w;
     int h;
+    static Data_Loader data_loader;
 
 public:
     Image(int w, int h);

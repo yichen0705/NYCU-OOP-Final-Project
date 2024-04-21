@@ -1,8 +1,5 @@
 #include "gray_image.h"
 
-// Initialize the static Data_Loader object
-Data_Loader GrayImage::data_loader(0);
-
 GrayImage::GrayImage() : Image(0, 0){
     pixels =  nullptr;
 }

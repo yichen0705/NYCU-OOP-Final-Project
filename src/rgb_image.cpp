@@ -1,8 +1,5 @@
 #include "rgb_image.h"
 
-// Initialize the static Data_Loader object
-Data_Loader RGBImage::data_loader(0);
-
 RGBImage::RGBImage() : Image(0, 0){
     pixels = nullptr;
 }

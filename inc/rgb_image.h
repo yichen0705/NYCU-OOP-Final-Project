@@ -8,7 +8,6 @@
 class RGBImage : public Image{
 private:
     RGB_pixel **pixels;
-    static Data_Loader data_loader;
 
 public:
     RGBImage();
