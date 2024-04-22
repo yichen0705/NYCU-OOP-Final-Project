@@ -16,9 +16,10 @@ GrayImage::~GrayImage(){
     pixels = nullptr;
 }
 
-void GrayImage::LoadImage(string filename){
+bool GrayImage::LoadImage(string filename){
     int **pixels = nullptr;
     pixels = data_loader.Load_Gray(filename, &w, &h);
-    data_loader.Display_Gray(w, h, pixels);
+    // data_loader.Display_Gray(w, h, pixels);
     data_loader.Display_Gray_ASCII(w, h, pixels);
+    return true;
 }

@@ -1,5 +1,9 @@
 #include "data_loader.h"
 
+Data_Loader::Data_Loader(){
+    ;
+}
+
 Data_Loader::Data_Loader(int verbose){
     this->verbose = verbose;
 }
@@ -66,6 +70,9 @@ int ***Data_Loader::Load_RGB(string filename, int *w, int *h){
 
     *w = _w;
     *h = _h;
+    cout << filename << '\n';
+    printf("%d, %d, %d\n", _h, _w, _c);
+    if(_c != 3) return nullptr;
     assert(_c == 3);
 
     // Allocate memory for the 3D array
@@ -154,4 +161,23 @@ void Data_Loader::Display_RGB_ASCII(int w, int h, int ***pixels){
         }
         std::cout << std::endl;
     }
+}
+
+bool Data_Loader::List_Directory(string directoryPath, vector<string> &filenames) {
+    struct dirent *entry;
+    DIR *dp;
+
+    dp = opendir(directoryPath.c_str());
+    if (dp == NULL) {
+        perror("opendir: Path does not exist or could not be read.");
+        return -1;
+    }
+
+    while ((entry = readdir(dp))){
+        // store all the .png filename into vector
+        filenames.push_back(directoryPath + "/" + string(entry->d_name));
+    }
+
+    closedir(dp);
+    return 0;
 }
