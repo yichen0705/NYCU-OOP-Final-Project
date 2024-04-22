@@ -11,7 +11,7 @@ public:
     GrayImage();
     GrayImage(int w, int h, int **pixels);
     ~GrayImage();
-    void LoadImage(string filename);
+    bool LoadImage(string filename);
 };
 
 #endif

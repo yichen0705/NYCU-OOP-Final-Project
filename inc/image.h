@@ -3,7 +3,7 @@
 
 #include <iostream>
 #include <string.h>
-#include <data_loader.h>
+#include "data_loader.h"
 
 using namespace std;
 
@@ -16,7 +16,10 @@ protected:
 public:
     Image(int w, int h);
     virtual ~Image();
-    virtual void LoadImage(string filename) = 0;
+    virtual bool LoadImage(string filename) = 0;
+    int get_w();
+    int get_h();
+    
 };
 
 #endif

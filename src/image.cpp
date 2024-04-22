@@ -11,3 +11,11 @@ Image::Image(int w, int h){
 Image::~Image(){
     ;
 }
+
+int Image::get_w(){
+    return w;
+}
+
+int Image::get_h(){
+    return h;
+}

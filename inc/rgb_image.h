@@ -2,18 +2,23 @@
 #define _RGB_IMAGE_H_
 
 #include "image.h"
-#include "rgb_pixel.h"
-#include "gray_image.h"
 
 class RGBImage : public Image{
 private:
-    RGB_pixel **pixels;
+    int ***pixels;
+    double r_avg;
+    double g_avg;
+    double b_avg;
 
 public:
     RGBImage();
-    RGBImage(int w, int h, RGB_pixel **pixels);
+    RGBImage(int w, int h, int ***pixels);
     ~RGBImage();
-    void LoadImage(string filename);
+    bool LoadImage(string filename);
+    double operator- (RGBImage &rhs);
+    // bool operator< (RGBImage &rhs);
+    void calAverage(int row, int col);
+    friend class PhotoMosaic;
 };
 
 #endif

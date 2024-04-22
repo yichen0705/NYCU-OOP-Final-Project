@@ -6,6 +6,7 @@
 #include <iostream>
 #include <string>
 #include <cassert>
+#include <vector>
 
 // for luminance formula: Y = 0.2126R + 0.7152G + 0.0722B
 #define R_FACTOR 0.2126
@@ -22,6 +23,7 @@ private:
     int **pixels;
 
 public:
+    Data_Loader();
     Data_Loader(int verbose);
     ~Data_Loader();
     void Set_Verbose(int verbose);
@@ -31,6 +33,7 @@ public:
     void Display_RGB(int w, int h, int ***pixels);
     void Display_Gray_ASCII(int w, int h, int **pixels);
     void Display_RGB_ASCII(int w, int h, int ***pixels);
+    bool List_Directory(string directoryPath, vector<string> &filenames);
 };
 
 #endif
