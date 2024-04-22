@@ -21,4 +21,12 @@ make -j
 make test
 cd ../../
 
+# Clone catimg repository
+echo "Cloning catimg repository..."
+git clone https://github.com/posva/catimg third-party/catimg
+cd third-party/catimg
+cmake .
+make -j
+
+
 echo "Cloning and configuration completed."

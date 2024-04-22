@@ -40,6 +40,25 @@ bool RGBImage::LoadImage(string filename){
     return true;
 }
 
+void RGBImage::DumpImage(string filename){
+    data_loader.Dump_RGB(w, h, pixels, filename);
+}
+
+void RGBImage::Display_X_Server(){
+    data_loader.Display_RGB_X_Server(w, h, pixels);
+}
+
+void RGBImage::Display_ASCII(){
+    data_loader.Display_RGB_ASCII(w, h, pixels);
+}
+
+void RGBImage::Display_CMD(){
+    data_loader.Dump_RGB(w, h, pixels, string("tmp.jpg"));
+    data_loader.Display_RGB_CMD(string("tmp.jpg"));
+    system("rm tmp.jpg");
+}
+
+
 double RGBImage::operator- (RGBImage &rhs){
     double r_diff = r_avg-rhs.r_avg;
     double g_diff = g_avg-rhs.g_avg;

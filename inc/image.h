@@ -17,9 +17,14 @@ public:
     Image(int w, int h);
     virtual ~Image();
     virtual bool LoadImage(string filename) = 0;
+    virtual void DumpImage(string filename) = 0;
+    virtual void Display_X_Server() = 0;
+    virtual void Display_ASCII() = 0;
+    virtual void Display_CMD() = 0;
     int get_w();
     int get_h();
     
 };
 
 #endif
+

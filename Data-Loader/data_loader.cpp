@@ -32,7 +32,7 @@ int **Data_Loader::Load_Gray(string filename, int *w, int *h){
     *h = _h;
 
     // allocate memory for the image array
-    pixels = new int *[_h];
+    int **pixels = new int *[_h];
     for(int i = 0; i < _h; i++){
         pixels[i] = new int[_w];
     }
@@ -91,7 +91,40 @@ int ***Data_Loader::Load_RGB(string filename, int *w, int *h){
     return pixels;
 }
 
-void Data_Loader::Display_Gray(int w, int h, int **pixels){
+void Data_Loader::Dump_Gray(int w, int h, int **pixels, string filename){
+    // Create a CImg object with the specified width and height
+    CImg<unsigned char> img(w, h, 1, 1); // Grayscale image (1 channel)
+
+    // Iterate through the image data and set pixel values
+    for (int y = 0; y < h; ++y) {
+        for (int x = 0; x < w; ++x) {
+            // Set the grayscale pixel value
+            img(x, y) = (unsigned char)pixels[y][x];
+        }
+    }
+    img.save(filename.c_str());
+
+}
+
+void Data_Loader::Dump_RGB(int w, int h, int ***pixels, string filename){
+    // Create a CImg object with the specified width, height, and 3 channels (RGB)
+    CImg<unsigned char> img(w, h, 1, 3);
+
+    // Iterate through the pixel values and set them in the CImg object
+    for (int y = 0; y < h; ++y) {
+        for (int x = 0; x < w; ++x) {
+            // Set the RGB pixel values
+            img(x, y, 0) = pixels[y][x][0]; // Red channel
+            img(x, y, 1) = pixels[y][x][1]; // Green channel
+            img(x, y, 2) = pixels[y][x][2]; // Blue channel
+        }
+    }
+
+    // Save the image to a file
+    img.save(filename.c_str());
+}
+
+void Data_Loader::Display_Gray_X_Server(int w, int h, int **pixels){
     assert(pixels != nullptr);
     // Create a grayscale image using CImg
     CImg<unsigned char> grayscale_img(w, h, 1); // 1 channel for grayscale
@@ -99,7 +132,7 @@ void Data_Loader::Display_Gray(int w, int h, int **pixels){
     // Copy pixel values from the 2D array to the grayscale image
     for (int y = 0; y < h; ++y) {
         for (int x = 0; x < w; ++x) {
-            grayscale_img(x, y) = (unsigned char)(pixels[y][x]);
+            grayscale_img(x, y) = (unsigned char)pixels[y][x];
         }
     }
 
@@ -110,7 +143,7 @@ void Data_Loader::Display_Gray(int w, int h, int **pixels){
     }
 }
 
-void Data_Loader::Display_RGB(int w, int h, int ***pixels){
+void Data_Loader::Display_RGB_X_Server(int w, int h, int ***pixels){
     // Create a CImg object for the RGB image
     CImg<unsigned char> rgb_img(w, h, 1, 3); // 3 channels for RGB
 
@@ -161,6 +194,16 @@ void Data_Loader::Display_RGB_ASCII(int w, int h, int ***pixels){
         }
         std::cout << std::endl;
     }
+}
+
+void Data_Loader::Display_Gray_CMD(string filename){
+    string cmd = "./third-party/catimg/bin/catimg " + string(filename);
+    system(cmd.c_str());
+}
+
+void Data_Loader::Display_RGB_CMD(string filename){
+    string cmd = "./third-party/catimg/bin/catimg " + string(filename);
+    system(cmd.c_str());
 }
 
 bool Data_Loader::List_Directory(string directoryPath, vector<string> &filenames) {
