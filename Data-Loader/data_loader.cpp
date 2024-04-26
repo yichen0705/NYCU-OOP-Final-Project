@@ -70,8 +70,8 @@ int ***Data_Loader::Load_RGB(string filename, int *w, int *h){
 
     *w = _w;
     *h = _h;
-    cout << filename << '\n';
-    printf("%d, %d, %d\n", _h, _w, _c);
+    // cout << filename << '\n';
+    // printf("%d, %d, %d\n", _h, _w, _c);
     if(_c != 3) return nullptr;
     assert(_c == 3);
 

@@ -24,7 +24,7 @@ int main(int argc, char *argv[]){
     // img2->Display_CMD();
 
     PhotoMosaic photomosaic;
-    int*** result = photomosaic.run("Image-Folder/4k_owl.jpg","Image-Folder/cifar10");
+    RGBImage* result = photomosaic.run("Image-Folder/girl_2x.png","Image-Folder/cifar10");
 
     return 0;
 }
