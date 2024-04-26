@@ -7,15 +7,14 @@
 class PhotoMosaic{
 private:
     static Data_Loader data_loader;
-    int*** result;
+    
     RGBImage target_img;
-    vector<RGBImage *> candidates;
     vector<string> candidate_filenames;
 
 public:
     PhotoMosaic();
     ~PhotoMosaic();
-    int ***run(string targetPath, string candidatePath);
+    RGBImage* run(string targetPath, string candidatePath);
 };
 
 #endif

@@ -12,6 +12,7 @@ private:
 
 public:
     RGBImage();
+    RGBImage(int w, int h);
     RGBImage(int w, int h, int ***pixels);
     ~RGBImage();
     bool LoadImage(string filename);

@@ -4,6 +4,16 @@ RGBImage::RGBImage() : Image(0, 0), r_avg(0), g_avg(0), b_avg(0){
     pixels = nullptr;
 }
 
+RGBImage::RGBImage(int w, int h) : Image(w, h){
+    pixels = new int**[h];
+    for(int i = 0; i < h; i++){
+        pixels[i] = new int*[w];
+        for(int j = 0; j < w; j++){
+            pixels[i][j] = new int[3];
+        }
+    }
+}
+
 RGBImage::RGBImage(int w, int h, int ***pixels) : Image(w, h){
     this->pixels = pixels;
 }
