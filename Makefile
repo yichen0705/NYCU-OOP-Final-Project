@@ -1,8 +1,9 @@
 # ompiler & Linker settings
 CXX = g++
 CXXFLAGS = -I ./inc -I ./third-party/CImg -I ./third-party/libjpeg -I ./Data-Loader -std=c++11
+OPTFLAGS = -g -Wall -march=native -flto -funroll-loops -finline-functions -ffast-math
 WARNINGS = -g -Wall
-LINKER = -L/usr/X11R6/lib -lm -lpthread -lX11 -L./third-party/libjpeg -ljpeg
+LINKER = -L/usr/X11R6/lib -lm -lpthread -lX11 -L./third-party/libjpeg -ljpeg -lpng
 
 # Valgrind for memory issue
 CHECKCC = valgrind
@@ -37,7 +38,7 @@ $(OBJDIR):
 
 $(TARGET): main.cpp $(OBJS) $(OBJDIR)/data_loader.o
 	$(VECHO) "	LD\t$@\n"
-	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $^ -o $@ $(LINKER)
+	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) $^ -o $@ $(LINKER)
 
 # Include generated dependency files
 -include $(DEPS)
@@ -45,12 +46,12 @@ $(TARGET): main.cpp $(OBJS) $(OBJDIR)/data_loader.o
 # Compilation rule for object files with automatic dependency generation
 $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR) Makefile
 	$(VECHO) "	CC\t$@\n"
-	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) -MMD -c $< -o $@
+	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) -MMD -c $< -o $@
 
 # Compilation rule for data_loader.o with explicit dependencies
 $(OBJDIR)/data_loader.o: ./Data-Loader/data_loader.cpp ./Data-Loader/data_loader.h | $(OBJDIR) Makefile
 	$(VECHO) "	CC\t$@\n"
-	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) -MMD -c $< -o $@
+	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) -MMD -c $< -o $@
 
 install:
 	chmod +x scripts/clone_env.sh  

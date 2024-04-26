@@ -1,12 +1,12 @@
 #include "image.h"
 #include "gray_image.h"
 #include "rgb_image.h"
+#include "photo_mosaic.h"
 #include <vector>
 
 using namespace std;
-
+using namespace cimg_library;
 int main(int argc, char *argv[]){
-    vector<string> filenames;
     
     Image *img1 = new GrayImage();
     img1->LoadImage("Image-Folder/mnist/img_100.jpg");
@@ -16,22 +16,15 @@ int main(int argc, char *argv[]){
     img1->Display_CMD();
     
 
-    Image *img2 = new RGBImage();
-    img2->LoadImage("Image-Folder/lena.jpg");
-    img2->DumpImage("img2.jpg");
-    img2->Display_X_Server();
-    img2->Display_ASCII();
-    img2->Display_CMD();
-    // Image *img1 = new GrayImage();
-    // img1->LoadImage("Image-Folder/lena.jpg");
-
     // Image *img2 = new RGBImage();
-    // img2->LoadImage("Image-Folder/lena.jpg");
+    // img2->LoadImage("bear.png");
+    // img2->DumpImage("img2.jpg");
+    // img2->Display_X_Server();
+    // img2->Display_ASCII();
+    // img2->Display_CMD();
 
-    // listdir_2("Image-Folder/cifar100_png/test", filenames);
-
-    // PhotoMosaic pm;
-    // int*** result = pm.run("Image-Folder/lena.jpg","Image-Folder/mnist");
+    PhotoMosaic photomosaic;
+    int*** result = photomosaic.run("Image-Folder/4k_owl.jpg","Image-Folder/cifar10");
 
     return 0;
 }

@@ -4,7 +4,7 @@
 #include "image.h"
 
 class GrayImage : public Image{
-public:
+private:
     int **pixels;
 
 public:

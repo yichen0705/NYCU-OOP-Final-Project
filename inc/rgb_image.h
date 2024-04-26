@@ -20,10 +20,9 @@ public:
     void Display_ASCII();
     void Display_CMD();
 
-
-    double operator- (RGBImage &rhs);
-    // bool operator< (RGBImage &rhs);
-    void calAverage(int row, int col);
+    // for photo mosaic
+    double operator-(const RGBImage &obj);
+    void GridAverage(int row, int col, int size);
     friend class PhotoMosaic;
 };
 
