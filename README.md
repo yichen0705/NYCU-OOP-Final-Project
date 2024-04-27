@@ -13,6 +13,6 @@ $   make -j        # parallel compiling
 ```
 
 ## Thanks for following open source project
-*   CImg
-*   libjpeg
-*   catimg
+*   CImg (https://github.com/GreycLab/CImg)
+*   libjpeg (https://github.com/kornelski/libjpeg)
+*   catimg (https://github.com/posva/catimg)

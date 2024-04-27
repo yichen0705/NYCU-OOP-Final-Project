@@ -2,6 +2,7 @@
 #include "gray_image.h"
 #include "rgb_image.h"
 #include "photo_mosaic.h"
+#include "bit_field_filter.h"
 
 int main(int argc, char *argv[]){
     Image *img1 = new GrayImage();
@@ -17,10 +18,10 @@ int main(int argc, char *argv[]){
     img2->Display_X_Server();
     img2->Display_CMD();
 
-    PhotoMosaic photomosaic;
-    RGBImage* result = photomosaic.run("Image-Folder/girl_2x.png","Image-Folder/cifar10");
-    result->DumpImage("img3.jpg");
-    result->Display_X_Server();
-    result->Display_CMD();
+    // some bit field filter design driven code here
+
+    // some photo mosaic driven code here
+
+    // more ...
     return 0;
 }

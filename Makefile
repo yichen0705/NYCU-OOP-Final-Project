@@ -66,7 +66,7 @@ install:
 	$(VECHO) "Finished installing third party dependencies!!\n"
 
 check:
-	$(CHECKCC) $(CHECKFLAGS) ./$(TARGET)
+	$(CHECKCC) $(CHECKFLAGS) ./Image_Processing
 
 clean:
 	rm -rf $(OBJDIR) $(TARGET)
