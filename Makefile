@@ -29,14 +29,18 @@ endif
 .PHONY: all install check clean
 
 # Name of the executable
-TARGET = Image_Processing
+TARGET = Image_Processing Data_Loader_Example
 
 all: $(TARGET)
 
 $(OBJDIR):
 	@mkdir $(OBJDIR)
 
-$(TARGET): main.cpp $(OBJS) $(OBJDIR)/data_loader.o
+Image_Processing: main.cpp $(OBJS) $(OBJDIR)/data_loader.o
+	$(VECHO) "	LD\t$@\n"
+	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) $^ -o $@ $(LINKER)
+
+Data_Loader_Example: data_loader_demo.cpp $(OBJDIR)/data_loader.o
 	$(VECHO) "	LD\t$@\n"
 	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) $^ -o $@ $(LINKER)
 
@@ -52,6 +56,8 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.cpp | $(OBJDIR) Makefile
 $(OBJDIR)/data_loader.o: ./Data-Loader/data_loader.cpp ./Data-Loader/data_loader.h | $(OBJDIR) Makefile
 	$(VECHO) "	CC\t$@\n"
 	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) -MMD -c $< -o $@
+
+
 
 install:
 	$(VECHO) "Installing third party dependencies\n"
