@@ -54,8 +54,10 @@ $(OBJDIR)/data_loader.o: ./Data-Loader/data_loader.cpp ./Data-Loader/data_loader
 	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) -MMD -c $< -o $@
 
 install:
-	chmod +x scripts/clone_env.sh  
-	./scripts/clone_env.sh  
+	$(VECHO) "Installing third party dependencies\n"
+	$(Q)chmod +x scripts/clone_env.sh  
+	$(Q)./scripts/clone_env.sh  > /dev/null 2>&1
+	$(VECHO) "Finished installing third party dependencies!!\n"
 
 check:
 	$(CHECKCC) $(CHECKFLAGS) ./$(TARGET)
