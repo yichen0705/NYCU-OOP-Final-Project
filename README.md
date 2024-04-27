@@ -1,11 +1,14 @@
 # OOP Final Project: Photo Mosaic
 
+[![hackmd-github-sync-badge](https://hackmd.io/wL8VqoYNS_GaZTepscWhlA/badge)](https://hackmd.io/wL8VqoYNS_GaZTepscWhlA)
+
+
 ![image](https://hackmd.io/_uploads/By0sjAYbR.png)
 如你所見，給定一張目標圖片，我們希望可以用很多張小圖拼湊出大圖的原貌。
 
 [TOC]
 
-## 前言
+## Preface
 https://www.ptt.cc/bbs/Tech_Job/M.1711983745.A.0AB.html
 
 ## Step 1: Play around data loader class(12%)
@@ -142,6 +145,40 @@ $ tree -L 2
                         ├── catimg
                         ├── CImg
                         └── libjpeg
+
+## Grading Policy
+*    Step1~Step5(12% * 5 = 60%) 需要將結果秀在書面報告中
+*    書面報告(15%)
+        *    Step1~Step5結果圖
+        *    解釋整份project中哪邊使用了繼承與多型
+        *    分享你在這份project中遇到了甚麼困難
+        *    跟其他組別比起來，你覺得你這組有什麼優勢?
+        *    心得與回饋
+*    額外功能(25%) 根據自己的興趣，自由發揮創意延伸
+
+## Submission
+*    Time: 2024/6/11(二) 13:00
+*    File to submit: NYCU-OOP-Final-Project.tar & final_report.pdf
+        ```bash=
+        # 產生壓縮檔
+        $ ls # 確認已跳到NYCU-OOP-Final-Project外面
+        $ tar cvf NYCU-OOP-Final-Project.tar NYCU-OOP-Final-Project/
+        $ ls # 產生NYCU-OOP-Final-Project.tar -> submit to e3
+
+        # 解壓縮
+        $ tar xvf NYCU-OOP-Final-Project.tar
+        ```
+:::info
+請確認解壓縮後，可以在linux server上成功編譯並且執行。
+:::
+
+## Demo
+*    Time: 2024/6/11(二) 14:00 ~16:00
+*    Place: Online
+
+:::info
+在Linux中運行程式，詳細的呈現每一項功能，沒有demo的組別期末專題0分
+:::
 
 ## Thanks for the following open source projects
 *   CImg (https://github.com/GreycLab/CImg)
