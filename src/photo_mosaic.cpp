@@ -1,6 +1,6 @@
 #include "photo_mosaic.h"
 
-Data_Loader PhotoMosaic::data_loader(0);
+Data_Loader PhotoMosaic::data_loader;
 
 PhotoMosaic::PhotoMosaic(){
     ;

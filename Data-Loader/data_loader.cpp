@@ -4,17 +4,9 @@ Data_Loader::Data_Loader(){
     ;
 }
 
-Data_Loader::Data_Loader(int verbose){
-    this->verbose = verbose;
-}
-
 // Assume user will free the image
 Data_Loader::~Data_Loader(){
     ;
-}
-
-void Data_Loader::Set_Verbose(int verbose){
-    this->verbose = verbose;
 }
 
 int **Data_Loader::Load_Gray(string filename, int *w, int *h){
@@ -24,10 +16,6 @@ int **Data_Loader::Load_Gray(string filename, int *w, int *h){
     int _w = img.width();
     int _h = img.height();
     int _c = img.spectrum();
-
-    if(verbose == 1){
-        cout << "Image: " + filename << " width = " << _w << " height = " << _h << " channel = " << _c << endl;
-    }
 
     *w = _w;
     *h = _h;
@@ -70,10 +58,6 @@ int ***Data_Loader::Load_RGB(string filename, int *w, int *h){
     int _w = img.width();
     int _h = img.height();
     int _c = img.spectrum();
-
-    if(verbose == 1){
-        cout << "Image: " + filename << " width = " << _w << " height = " << _h << " channel = " << _c << endl;
-    }
 
     *w = _w;
     *h = _h;

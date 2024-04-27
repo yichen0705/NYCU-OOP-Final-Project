@@ -20,14 +20,10 @@ using namespace std;
 using namespace cimg_library;
 
 class Data_Loader{
-private:
-    int verbose = 0;
 
 public:
     Data_Loader();
-    Data_Loader(int verbose);
     ~Data_Loader();
-    void Set_Verbose(int verbose);
     int **Load_Gray(string filename, int *w, int *h);
     int ***Load_RGB(string filename, int *w, int *h);
     void Dump_Gray(int w, int h, int **pixels, string filename);

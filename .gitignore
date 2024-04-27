@@ -1,6 +1,6 @@
 third-party/*
 *.jpg
 *.png
-bin/*.o
-bin/*.d
+obj/*.o
+obj/*.d
 Image_Processing
