@@ -51,6 +51,5 @@ RGBImage* PhotoMosaic::run(string targetPath, string candidatePath){
             }
         }
     }
-    data_loader.Display_RGB_X_Server(target_img.get_w(), target_img.get_h(), result->pixels);
     return result;
 }

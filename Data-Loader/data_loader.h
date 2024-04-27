@@ -9,6 +9,7 @@
 #include <cassert>
 #include <vector>
 #include <cstdlib>
+#include <fstream>
 
 // for luminance formula: Y = 0.2126R + 0.7152G + 0.0722B
 #define R_FACTOR 0.2126
@@ -38,6 +39,9 @@ public:
     void Display_Gray_CMD(string filename);
     void Display_RGB_CMD(string filename);
     bool List_Directory(string directoryPath, vector<string> &filenames);
+
+private:
+    bool File_Exists(const string &filename);
 };
 
 #endif

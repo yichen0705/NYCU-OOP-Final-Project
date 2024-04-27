@@ -18,6 +18,7 @@ void Data_Loader::Set_Verbose(int verbose){
 }
 
 int **Data_Loader::Load_Gray(string filename, int *w, int *h){
+    assert(File_Exists(filename));
     CImg<unsigned char> img(filename.c_str());
 
     int _w = img.width();
@@ -47,17 +48,23 @@ int **Data_Loader::Load_Gray(string filename, int *w, int *h){
     }
     
     // rgb img -> convert it into gray scale img
-    CImg<unsigned char> grayscale_img(_w, _h, 1);
-    cimg_forXY(grayscale_img, x, y){
-        grayscale_img(x, y) = (unsigned char)(R_FACTOR * img(x, y, 0, 0) + G_FACTOR * img(x, y, 0, 1) + B_FACTOR * img(x, y, 0, 2));
+    if(_c == 3){
+        CImg<unsigned char> grayscale_img(_w, _h, 1);
+        cimg_forXY(grayscale_img, x, y){
+            grayscale_img(x, y) = (unsigned char)(R_FACTOR * img(x, y, 0, 0) + G_FACTOR * img(x, y, 0, 1) + B_FACTOR * img(x, y, 0, 2));
+        }
+        cimg_forXY(img, x, y){
+            pixels[y][x] = (int)grayscale_img(x,y);
+        }
+        return pixels;
     }
-    cimg_forXY(img, x, y){
-        pixels[y][x] = (int)grayscale_img(x,y);
-    }
-    return pixels;
+
+    // for CMYK or other spetrum
+    return nullptr;
 }
 
 int ***Data_Loader::Load_RGB(string filename, int *w, int *h){
+    assert(File_Exists(filename));
     CImg<unsigned char> img(filename.c_str());
 
     int _w = img.width();
@@ -70,10 +77,8 @@ int ***Data_Loader::Load_RGB(string filename, int *w, int *h){
 
     *w = _w;
     *h = _h;
-    // cout << filename << '\n';
-    // printf("%d, %d, %d\n", _h, _w, _c);
+
     if(_c != 3) return nullptr;
-    assert(_c == 3);
 
     // Allocate memory for the 3D array
     int ***pixels = new int**[_h];
@@ -92,6 +97,7 @@ int ***Data_Loader::Load_RGB(string filename, int *w, int *h){
 }
 
 void Data_Loader::Dump_Gray(int w, int h, int **pixels, string filename){
+    assert(pixels != nullptr && w > 0 && h > 0);
     // Create a CImg object with the specified width and height
     CImg<unsigned char> img(w, h, 1, 1); // Grayscale image (1 channel)
 
@@ -107,6 +113,7 @@ void Data_Loader::Dump_Gray(int w, int h, int **pixels, string filename){
 }
 
 void Data_Loader::Dump_RGB(int w, int h, int ***pixels, string filename){
+    assert(pixels != nullptr && w > 0 && h > 0);
     // Create a CImg object with the specified width, height, and 3 channels (RGB)
     CImg<unsigned char> img(w, h, 1, 3);
 
@@ -125,7 +132,7 @@ void Data_Loader::Dump_RGB(int w, int h, int ***pixels, string filename){
 }
 
 void Data_Loader::Display_Gray_X_Server(int w, int h, int **pixels){
-    assert(pixels != nullptr);
+    assert(pixels != nullptr && w > 0 && h > 0);
     // Create a grayscale image using CImg
     CImg<unsigned char> grayscale_img(w, h, 1); // 1 channel for grayscale
 
@@ -144,6 +151,7 @@ void Data_Loader::Display_Gray_X_Server(int w, int h, int **pixels){
 }
 
 void Data_Loader::Display_RGB_X_Server(int w, int h, int ***pixels){
+    assert(pixels != nullptr && w > 0 && h > 0);
     // Create a CImg object for the RGB image
     CImg<unsigned char> rgb_img(w, h, 1, 3); // 3 channels for RGB
 
@@ -151,7 +159,7 @@ void Data_Loader::Display_RGB_X_Server(int w, int h, int ***pixels){
     for (int y = 0; y < h; ++y) {
         for (int x = 0; x < w; ++x) {
             for (int c = 0; c < 3; ++c) { // 3 channels (R, G, B)
-                rgb_img(x, y, 0, c) = static_cast<unsigned char>(pixels[y][x][c]);
+                rgb_img(x, y, 0, c) = (unsigned char)(pixels[y][x][c]);
             }
         }
     }
@@ -164,6 +172,7 @@ void Data_Loader::Display_RGB_X_Server(int w, int h, int ***pixels){
 }
 
 void Data_Loader::Display_Gray_ASCII(int w, int h, int **pixels){
+    assert(pixels != nullptr && w > 0 && h > 0);
     // ASCII characters representing different shades of gray
     const char* shades = " .-+#@";
 
@@ -180,6 +189,7 @@ void Data_Loader::Display_Gray_ASCII(int w, int h, int **pixels){
 }
 
 void Data_Loader::Display_RGB_ASCII(int w, int h, int ***pixels){
+    assert(pixels != nullptr && w > 0 && h > 0);
     // ASCII characters representing different shades of gray
     const char* shades = " .-+#@";
 
@@ -197,11 +207,13 @@ void Data_Loader::Display_RGB_ASCII(int w, int h, int ***pixels){
 }
 
 void Data_Loader::Display_Gray_CMD(string filename){
+    assert(File_Exists(filename));
     string cmd = "./third-party/catimg/bin/catimg " + string(filename);
     system(cmd.c_str());
 }
 
 void Data_Loader::Display_RGB_CMD(string filename){
+    assert(File_Exists(filename));
     string cmd = "./third-party/catimg/bin/catimg " + string(filename);
     system(cmd.c_str());
 }
@@ -224,4 +236,9 @@ bool Data_Loader::List_Directory(string directoryPath, vector<string> &filenames
 
     closedir(dp);
     return 0;
+}
+
+bool Data_Loader::File_Exists(const string &filename){
+    ifstream file(filename.c_str());
+    return file.good();
 }
