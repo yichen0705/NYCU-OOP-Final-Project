@@ -47,7 +47,40 @@ int **Data_Loader::Load_Gray(string filename, int *w, int *h){
         return pixels;
     }
 
-    // for CMYK or other spetrum
+    // rgba image -> convert it into gray scale image
+    if(_c == 4){
+
+        // Allocate memory for the 3D array
+        int ***pixel3 = new int**[_h];
+        for(int i = 0; i < _h; ++i) {
+            pixel3[i] = new int*[_w];
+            for(int j = 0; j < _w; ++j) {
+                pixel3[i][j] = new int[3];
+            }
+        }
+
+        // Copy pixel values from the image to the 3D array
+        cimg_forXYC(img, x, y, c) {
+            if(c < 3){
+                pixel3[y][x][c] = img(x, y, c);
+            }
+        }
+
+        for(int i = 0; i < _h; i++){
+            for(int j = 0; j < _w; j++){
+                pixels[i][j] = R_FACTOR * pixel3[i][j][0] + G_FACTOR * pixel3[i][j][1] + B_FACTOR * pixel3[i][j][2];
+            }
+        }
+        for(int i = 0; i < _h; i++){
+            for(int j = 0; j < _w; j++){
+                delete []pixel3[i][j];
+            }
+            delete []pixel3[i];
+        }
+        delete []pixel3;
+        return pixels;
+    }
+
     return nullptr;
 }
 
@@ -62,20 +95,22 @@ int ***Data_Loader::Load_RGB(string filename, int *w, int *h){
     *w = _w;
     *h = _h;
 
-    if(_c != 3) return nullptr;
+    if(_c < 3) return nullptr;
 
     // Allocate memory for the 3D array
     int ***pixels = new int**[_h];
     for(int i = 0; i < _h; ++i) {
         pixels[i] = new int*[_w];
         for(int j = 0; j < _w; ++j) {
-            pixels[i][j] = new int[_c];
+            pixels[i][j] = new int[3];
         }
     }
 
     // Copy pixel values from the image to the 3D array
     cimg_forXYC(img, x, y, c) {
-        pixels[y][x][c] = img(x, y, c);
+        if(c < 3){
+            pixels[y][x][c] = img(x, y, c);
+        }
     }
     return pixels;
 }
