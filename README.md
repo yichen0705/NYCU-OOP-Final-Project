@@ -1,4 +1,9 @@
 # OOP Final Project: Photo Mosaic
+Last Updated: 5/26
+:::warning
+Update Q&A section(新增QA部分在最後面!)  
+寄信詢問前可以先看一下問題有沒有被問過!
+:::
 
 [![hackmd-github-sync-badge](https://hackmd.io/wL8VqoYNS_GaZTepscWhlA/badge)](https://hackmd.io/wL8VqoYNS_GaZTepscWhlA)
 
@@ -7,6 +12,9 @@
 如你所見，給定一張目標圖片，我們希望可以用很多張小圖拼湊出大圖的原貌。
 
 [TOC]
+
+## 解說影片
+<iframe width="560" height="315" src="https://www.youtube.com/embed/GPI-fnaDGTk?si=yuDb7vlTXbLNm7Ic" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
 ## 誰適合寫這份題目?
 *    對學習和探索新知識充滿熱情的人
@@ -38,7 +46,7 @@ Ref: [https://processing.org/tutorials/color]
 :::
 ![image](https://hackmd.io/_uploads/B1IwawiW0.png)
 
-## Step 1: Play around data loader class(12%)
+## Step 1: Play around data loader class(15%)
 圖片在存成jpg/png是有經過壓縮加密過的，若是學員要直接讀取圖片檔，會有不少問題。因此提供data_loader使學員可以直接得到圖片的像素矩陣及長寬，來進行後續的運算及操作。
 
 以下是data_loader的interface:
@@ -129,7 +137,7 @@ data_loader提供了三種介面來展示圖片:
         bool List_Directory(string directoryPath, vector<string> &filenames);
         ```
 
-## Step 2: Construct image inheritance and polymorphism(12%)
+## Step 2: Construct image inheritance and polymorphism(15%)
 
 透過base class Image，來讓gray_image及rgb_image繼承，來讓同學練習繼承多型及virtual function。需要將第一步所提及的data_loader與這些class整合。來實現load image/dump image/display image，等基礎功能。
 
@@ -219,7 +227,7 @@ img2->Display_CMD();
 :::
 
 
-## Step 3: Bit-field with image filter design(12%)
+## Step 3: Bit-field with image filter design(15%)
 一般圖片在做影像處理演算法時，大多會通過許多次的影像增強演算法或是降躁銳化。因此在這個部分，我們希望學員透過使用bit_field的方式，來指定要通過1~4種簡單影像處理的演算法。
 
 *    Bit field介紹:
@@ -295,7 +303,7 @@ int main(){
 預期同學實作任意四種以上的圖片影像處理的演算法，並透過bit field的概念來決定要enable哪幾個演算法。
 :::
 
-## Step 4: Photo Mosaic(12%)
+## Step 4: Photo Mosaic(15%)
 
 透過許多張小圖來當成大圖的像素。透過RGB channel的平均值來決定大圖中某個grid要由哪個小圖來代表。我們會提供常見的dataset: cifar10, mnist，來給學生當成小圖，大圖同學可以自行準備，抑或是使用我們提供的放在Image-Folder內部的圖片。
 
@@ -317,21 +325,16 @@ $$
 
 [more algorithm reference & detail](https://www.geeksforgeeks.org/implementing-photomosaics/)
 
+:::warning
+學員可以在必要的情況下，針對class image gray_image rgb_image增加operator overloading/resize/crop等method，來協助實作photo mosaic的部分。
+:::
+
+
 感謝作者TA林煜睿提供照片測試:
 ![image](https://hackmd.io/_uploads/r13qhFi-R.png)
 
 Zoom in:
 ![Zoom in girl](https://hackmd.io/_uploads/B1PvTKoWC.jpg)
-
-
-
-## Step 5: Documentation/QC/QA(12%)
-在這個部分，同學不需要coding, 僅需要在報告中回答問題即可。
-*    Q1:請大致解釋 `make install`做了甚麼事情。
-*    Q2:makefile是如何協助編譯這份project的?(從inc/ src/回答)
-*    Q3:在Step4中，你如何處理邊界問題?(若大圖的長寬不是小圖的倍數，你會怎麼處理?)
-*    Q4:在Step4中，如果每張小圖的大小都不一樣，你會怎麼處理?
-*    Q5:使用valgrind及cppcheck來對你的程式做動態分析與靜態分析，並秀出執行結果與報告。並解釋這兩種分析有何不同?(try to install cppcheck by your self...)
 
 ## Driven Code for Step1~4
 希望學員能夠設計一個清晰且優雅的使用者流程讓上面Step1~4與您所設計的加分項目都可以被demo到。若是單一一個main.cpp不夠您demo所有的功能，您可以自行設計其他driven code的檔案，並且更改`Makefile`中相關編譯的dependency與方法。
@@ -402,22 +405,46 @@ $ tree -L 2
 將class header interface放在inc folder內部，並且將source code的實作放在src folder內部，makefile會自動去識別dependency，並且在您對某些檔案進行修改後，僅編譯需要重新編譯之檔案，不會整份project重新編譯一次，如此一來再搭配上parallel compile，讓您再開發上能夠節省不少時間。
 
 ## Grading Policy
-*    Step1~Step5(12% * 5 = 60%) 需要將結果秀在書面報告中
-*    書面報告(15%)
+*    Step1~Step4(15% * 4 = 60%) 需要將結果秀在書面報告中
+:::info
+請將QA及書面報告整理在一份pdf報告中!
+:::
+*    QA(6%)
+        *    Q1:請大致解釋 `make install`做了甚麼事情。
+        *    Q2:makefile是如何協助編譯這份project的?(從inc/ src/回答)
+        *    Q3:請解釋在Step3中如何設計bit field演算法，如何決定要使用多少bit，這樣做有甚麼優點?
+        *    Q4:在Step4中，你如何處理邊界問題?(若大圖的長寬不是小圖的倍數，你會怎麼處理?)
+        *    Q5:在Step4中，如果每張小圖的大小都不一樣，你會怎麼處理?
+        *    Q6:使用valgrind及cppcheck來對你的程式做動態分析與靜態分析，並秀出執行結果與報告。並解釋這兩種分析有何不同?(try to install cppcheck by your self...)
+
+*    書面報告(9%)
         *    Step1~Step5結果圖
-        *    解釋整份project中哪邊使用了繼承與多型
+        *    解釋整份project中哪邊使用了繼承與多型，對於Step3&4及你的加分題是如何與其他的class互動的?eg: friend class, another inheritance?請使用類似Step2那張class之間的關係圖清楚的表示。
         *    分享你在這份project中遇到了甚麼困難，又是如何解決的?
         *    跟其他組別比起來，你覺得你這組有什麼優勢?
         *    心得與回饋
+
 *    額外功能(25%) 根據自己的興趣，自由發揮創意延伸
-        *    鼓勵大家貢獻自己的程式到開源社群，上傳project到github得到5分。(需附上project repo)
-        *    Image Floorplan
+        *    鼓勵大家貢獻自己的程式到開源社群，上傳project到github得到2分。(需附上project repo)並且盡早建立如何做好程式專案版本控制(version control)及如何與團隊協作專案的能力。 [ref link](https://github.com/twtrubiks/Git-Tutorials)  
+        (先fork repo，再git clone -> commit -> push to your own repo)  
+        
+        或是你直接開一個新的repo，直接整包上傳上去，不會的話再來信詢問!
+        *    Image Segamentation(影像分割)
         *    Photo Mosaic with only 1 picture [IEEE paper](https://ieeexplore.ieee.org/document/7965140)
         ![image](https://hackmd.io/_uploads/r171Wpq-C.png)
-        *    Parallel Algorithm Implementation(MPI/pthread/cuda)
+        *    Parallel Algorithm Implementation(MPI/pthread/cuda): NTHU PP周志遠教授
+
+                <iframe width="560" height="315" src="https://www.youtube.com/embed/t_q0Tajpyso?si=zQekxMCXDOAkGfTa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+        *    Design Pattern: [ref link](https://refactoring.guru/design-patterns/cpp)  
+                C++中的設計模式很重要，因為它們提供了解決常見問題的有效方法。在這門課中，僅有教學員簡單的OOP語法，並沒有教導學員如何撰寫出有品味，可重複使用，可維護性及可擴展性的程式碼。Design Pattern，是一種OOP程式的模板，遇到某種問題，便可以套用這些模板來使用，來減少錯誤的發生並且提高程式的重用性、可擴展性和可維護性，並且有助於團隊間的溝通和遵循最佳實踐。
+        
+:::info
+以上為我所推薦的幾個加分題的方向，學員不需要侷限在這些題目中，可以自行發想有趣的題目。
+:::
 
 ## Submission
-*    Time: 2024/6/11(二) 13:00
+*    Time: 2024/6/17(二) 12:00
 *    File to submit: `NYCU-OOP-Final-Project.tar` & `final_report.pdf`
         ```bash=
         # 產生壓縮檔
@@ -433,7 +460,7 @@ $ tree -L 2
 :::
 
 ## Demo
-*    Time: 2024/6/11(二) 14:00 ~16:00
+*    Time: 2024/6/17(一) 14:00 ~16:00
 *    Place: Online
 
 :::info
@@ -456,3 +483,56 @@ $ tree -L 2
 *   CImg (https://github.com/GreycLab/CImg)
 *   libjpeg (https://github.com/kornelski/libjpeg)
 *   catimg (https://github.com/posva/catimg)
+
+## Q&A
+
+*    Q1:
+關於期末專題的memory leak check，有提到跟X_Server有關的function會影響檢查的結果，檢查時不要用這個function，想請問具體是要在哪些地方disable掉這個function呢?
+
+        :::spoiler
+        與X_server相關的function因為valgrind尚未將這個display的function列入考慮，因此會有false alarm的問題在，在錯誤訊息中也可以看到valgrind有自己承認他不能識別該function。至於要如何disable，你可以就單純把需要使用到X_server的時候註解掉即可。此時valgrind便不會執行到該function，便不會有相關問題。
+        
+        好一點的註解方法: (善用flag)
+        ```bash=
+        #define ENABLE_X_SERVER false
+
+        if(ENABLE_X_SERVER){
+            //X_Server command here
+        }
+        ```
+        
+        ![image](https://hackmd.io/_uploads/BJcaPN3mR.png)
+        上圖為valgrind沒有disable X_server相關command的警示訊息，給同學參考。
+        :::
+
+*    Q2:
+有些圖片為何經過data_loader讀取後會發生錯誤?
+
+        :::spoiler
+        有些圖片除了R、G、B三個通道外，還會帶有第四個代表透明度的alpha通道，由於先前Data_Loader中Load_RGB所定義的pixels為三通道，因此讀取後會產生錯誤。這種問題會出現在某些png圖片中而不可能發生於jpg圖片，因為png才會有透明屬性，jpg則無。
+        
+        因此我們修改Data_Loader中Load_RGB，首先創建Dynamic Array時直接限制為三通道(不再根據_c創建對應大小的陣列，因為_c有可能為4)，並限制其只填寫前三個通道的數值至pixels中(即不填寫alpha通道的數值)。同理，Load_Gray我們也做了相應的處理。
+        
+        因此最後同學透過Data_Loader Load_RGB與Load_Gray所讀取的結果將不再帶有alpha屬性，只要當作正常三通道(RGB)或是單通道(灰階)的圖片進行操作即可。
+        
+        如果同學已經開始實作的話，請依照下列步驟將Data_Loader.cpp更新至最新的版本:
+        ```bash=
+        $ cd NYCU-OOP-Final-Project
+        $ git pull
+        ```
+        如此便可單純更新data_loader.cpp中的內容，而不會更改同學已經實作的部分。
+        
+        相關資料同學可以參閱此網站: https://reurl.cc/OMmpRD
+        :::
+    
+
+*    Q3:
+GrayImage 和 RGBImage class 中的CMD要呼叫datal_oader裡的Diaplay_Gray_CMD、Display_RGB_CMD function，但我們不知道filename要去哪裡抓，請助教們解惑。
+
+        :::spoiler
+        這邊其實有點tricky,算是我想要考你們的其中一個點：中間檔案的產出。
+
+        有時候在程式執行中，不免會產生一些中間的檔案，可能是log(程式執行上的一些紀錄），抑或是其他程式或是function會需要吃的特定format 的output file 。
+
+        這邊我有提示需要搭配dump 來使用，可以先產生一個暫時的輸出圖片，使用CMD相關function之後（內部實作其實是去call catimg 的binary 執行檔），再使用system call的方法將該暫時出現的圖片刪除。查詢C/C++ system()的使用方式，配搭之前之前上機課教過的linux command 即可在c++中刪除該中間產生的圖片檔！
+        :::
