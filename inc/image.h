@@ -11,7 +11,7 @@ protected:
     int height;
     Data_Loader data_loader;
 public:
-    Image(int width, int height);
+    Image(int _width, int _height);
     virtual~Image();
     virtual bool LoadImage(string filename) = 0;
     virtual void DumpImage(string filename) = 0;
