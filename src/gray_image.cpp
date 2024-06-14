@@ -1,7 +1,5 @@
 #include "gray_image.h"
 
-#include <cstdio>
-
 #include "image_loader.h"
 
 bool GrayImage::LoadImage(std::string filename){

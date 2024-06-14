@@ -8,15 +8,10 @@
 #include "color.h"
 
 
-class BaseFilter;
+class InvertFilter;
 
 class Image {
 public:
-    enum FilterType {
-        FILTER_BLUR = 1 << 0,
-        FILTER_INVERT = 1 << 1,
-    };
-
     Image()=default;
     virtual ~Image();
     
@@ -27,10 +22,10 @@ public:
     void Display_ASCII();
     void Display_CMD();
 
-    void ApplyFilters(uint32_t options);
+    int GetWidth() { return width; }
+    int GetHeight() { return height; }
 
-    int get_width() { return width; }
-    int get_height() { return height; }
+    friend class InvertFilter;    
 
 protected:
     int width = 0;
