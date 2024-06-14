@@ -1,25 +1,41 @@
 #ifndef _IMAGE_H_
 #define _IMAGE_H_
 
-#include "data_loader.h"
+#include <cstdint>
+#include <vector>
+#include <string>
 
-using namespace std;
+#include "color.h"
 
-class Image{
-protected:
-    int width;
-    int height;
-    Data_Loader data_loader;
+
+class BaseFilter;
+
+class Image {
 public:
-    Image(int _width, int _height);
-    virtual~Image();
-    virtual bool LoadImage(string filename) = 0;
-    virtual void DumpImage(string filename) = 0;
-    virtual void Display_X_Server() = 0;
-    virtual void Display_ASCII() = 0;
-    virtual void Display_CMD() = 0;
-    int get_width();
-    int get_height();
+    enum FilterType {
+        FILTER_BLUR = 1 << 0,
+        FILTER_INVERT = 1 << 1,
+    };
+
+    Image()=default;
+    virtual ~Image();
+    
+    virtual bool LoadImage(std::string filename) = 0;
+    void DumpImage(std::string filename);
+    
+    void Display_X_Server();
+    void Display_ASCII();
+    void Display_CMD();
+
+    void ApplyFilters(uint32_t options);
+
+    int get_width() { return width; }
+    int get_height() { return height; }
+
+protected:
+    int width = 0;
+    int height = 0;
+    Color** pixels = nullptr;
 };
 
 #endif

@@ -3,18 +3,9 @@
 
 #include "image.h"
 
-class GrayImage : public Image{
-private:
-    int **pixels;
+class GrayImage : public Image {
 public:
-    GrayImage();
-    GrayImage(int width, int height, int **pixels);
-    virtual~GrayImage();
-    virtual bool LoadImage(string filename);
-    virtual void DumpImage(string filename);
-    virtual void Display_X_Server();
-    virtual void Display_ASCII();
-    virtual void Display_CMD();
+    virtual bool LoadImage(std::string filename);
 };
 
 #endif

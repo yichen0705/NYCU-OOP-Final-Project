@@ -1,8 +1,6 @@
 #include "image.h"
 #include "gray_image.h"
 #include "rgb_image.h"
-#include "photo_mosaic.h"
-#include "bit_field_filter.h"
 
 int main(int argc, char *argv[]){
     Image *img1 = new GrayImage();

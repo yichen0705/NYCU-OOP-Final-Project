@@ -3,18 +3,9 @@
 
 #include "image.h"
 
-class RGBImage : public Image{
-private:
-    int ***pixels;
+class RGBImage : public Image {
 public:
-    RGBImage();
-    RGBImage(int width, int height, int **pixels);
-    virtual~RGBImage();
-    virtual bool LoadImage(string filename);
-    virtual void DumpImage(string filename);
-    virtual void Display_X_Server();
-    virtual void Display_ASCII();
-    virtual void Display_CMD();
+    virtual bool LoadImage(std::string filename);
 };
 
 #endif
