@@ -16,28 +16,25 @@
 #define G_FACTOR 0.7152
 #define B_FACTOR 0.0722
 
-using namespace std;
-using namespace cimg_library;
-
 class Data_Loader{
 
 public:
     Data_Loader();
     ~Data_Loader();
-    int **Load_Gray(string filename, int *w, int *h);
-    int ***Load_RGB(string filename, int *w, int *h);
-    void Dump_Gray(int w, int h, int **pixels, string filename);
-    void Dump_RGB(int w, int h, int ***pixels, string filename);
+    int **Load_Gray(std::string filename, int *w, int *h);
+    int ***Load_RGB(std::string filename, int *w, int *h);
+    void Dump_Gray(int w, int h, int **pixels, std::string filename);
+    void Dump_RGB(int w, int h, int ***pixels, std::string filename);
     void Display_Gray_X_Server(int w, int h, int **pixels);
     void Display_RGB_X_Server(int w, int h, int ***pixels);
     void Display_Gray_ASCII(int w, int h, int **pixels);
     void Display_RGB_ASCII(int w, int h, int ***pixels);
-    void Display_Gray_CMD(string filename);
-    void Display_RGB_CMD(string filename);
-    bool List_Directory(string directoryPath, vector<string> &filenames);
+    void Display_Gray_CMD(std::string filename);
+    void Display_RGB_CMD(std::string filename);
+    bool List_Directory(std::string directoryPath, std::vector<std::string> &filenames);
 
 private:
-    bool File_Exists(const string &filename);
+    bool File_Exists(const std::string &filename);
 };
 
 #endif

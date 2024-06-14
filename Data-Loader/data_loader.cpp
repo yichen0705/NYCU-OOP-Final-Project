@@ -1,5 +1,8 @@
 #include "data_loader.h"
 
+using namespace std;
+using namespace cimg_library;
+
 Data_Loader::Data_Loader(){
     ;
 }
