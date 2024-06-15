@@ -10,6 +10,7 @@
 class BlurFilter;
 class InvertFilter;
 class MosaicFilter;
+class EdgeFilter;
 
 class Image {
 public:
@@ -32,6 +33,7 @@ public:
     friend class BlurFilter;
     friend class InvertFilter;
     friend class MosaicFilter;
+    friend class EdgeFilter;
 
 protected:
     int width = 0;

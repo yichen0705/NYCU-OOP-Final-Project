@@ -11,6 +11,7 @@ enum FilterType : uint32_t {
     FILTER_BLUR = 1 << 0,
     FILTER_INVERT = 1 << 1,
     FILTER_MOSAIC = 1 << 2,
+    FILTER_EDGE = 1 << 3,
 };
 
 class ImageFilter {
