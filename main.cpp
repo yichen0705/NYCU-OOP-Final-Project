@@ -7,7 +7,7 @@ int main(int argc, char *argv[]){
     img->LoadImage("Image-Folder/lena.jpg");
 
     ImageFilterManager& mgr = ImageFilterManager::GetInstance();
-    mgr.ApplyFilters(img, FILTER_BLUR | FILTER_INVERT);
+    mgr.ApplyFilters(img, FILTER_MOSAIC);
 
     img->Display_X_Server();
     return 0;
