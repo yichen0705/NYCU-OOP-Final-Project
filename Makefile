@@ -29,20 +29,25 @@ endif
 .PHONY: all install check clean
 
 # Name of the executable
-TARGET = Image_Processing Data_Loader_Example
+TARGET = Image_Processing Image_Mosaic # Data_Loader_Example
 
 all: $(TARGET)
 
 $(OBJDIR):
 	@mkdir $(OBJDIR)
 
-Image_Processing: main.cpp $(OBJS) $(OBJDIR)/data_loader.o
+Image_Processing: image_processing.cpp $(OBJS) $(OBJDIR)/data_loader.o
 	$(VECHO) "	LD\t$@\n"
 	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) $^ -o $@ $(LINKER)
 
-Data_Loader_Example: data_loader_demo.cpp $(OBJDIR)/data_loader.o
+Image_Mosaic: image_mosaic.cpp $(OBJS) $(OBJDIR)/data_loader.o
 	$(VECHO) "	LD\t$@\n"
 	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) $^ -o $@ $(LINKER)
+
+# Data_Loader_Example: data_loader_demo.cpp $(OBJDIR)/data_loader.o
+# 	$(VECHO) "	LD\t$@\n"
+# 	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) $^ -o $@ $(LINKER)
+
 
 # Include generated dependency files
 -include $(DEPS)

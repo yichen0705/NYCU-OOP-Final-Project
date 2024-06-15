@@ -13,7 +13,10 @@ Data_Loader::~Data_Loader(){
 }
 
 int **Data_Loader::Load_Gray(string filename, int *w, int *h){
-    assert(File_Exists(filename));
+    if (!File_Exists(filename)) {
+        return nullptr;
+    }
+
     CImg<unsigned char> img(filename.c_str());
 
     int _w = img.width();
@@ -88,7 +91,10 @@ int **Data_Loader::Load_Gray(string filename, int *w, int *h){
 }
 
 int ***Data_Loader::Load_RGB(string filename, int *w, int *h){
-    assert(File_Exists(filename));
+    if (!File_Exists(filename)) {
+        return nullptr;
+    }
+
     CImg<unsigned char> img(filename.c_str());
 
     int _w = img.width();
