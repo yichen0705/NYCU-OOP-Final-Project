@@ -71,7 +71,7 @@ install:
 	$(VECHO) "Finished installing third party dependencies!!\n"
 
 check:
-	$(CHECKCC) $(CHECKFLAGS) ./Image_Processing
+	$(CHECKCC) $(CHECKFLAGS) ./Image_Processing Image-Folder/lena.jpg
 
 clean:
 	rm -rf $(OBJDIR) $(TARGET)

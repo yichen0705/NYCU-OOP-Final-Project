@@ -30,8 +30,8 @@ public:
     void Display_ASCII();
     void Display_CMD();
 
-    int GetWidth() { return width; }
-    int GetHeight() { return height; }
+    int GetWidth() const { return width; }
+    int GetHeight() const { return height; }
 
     friend class BlurFilter;
     friend class InvertFilter;
