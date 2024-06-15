@@ -247,7 +247,7 @@ bool Data_Loader::List_Directory(string directoryPath, vector<string> &filenames
     dp = opendir(directoryPath.c_str());
     if (dp == NULL) {
         perror("opendir: Path does not exist or could not be read.");
-        return -1;
+        return false;
     }
 
     while ((entry = readdir(dp))){
@@ -257,7 +257,7 @@ bool Data_Loader::List_Directory(string directoryPath, vector<string> &filenames
     }
 
     closedir(dp);
-    return 0;
+    return true;
 }
 
 bool Data_Loader::File_Exists(const string &filename){

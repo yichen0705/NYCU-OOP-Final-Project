@@ -13,6 +13,8 @@ class MosaicFilter;
 class EdgeFilter;
 class SwirlFilter;
 
+class PhotoMosaic;
+
 class Image {
 public:
     Image()=default;
@@ -36,6 +38,8 @@ public:
     friend class MosaicFilter;
     friend class EdgeFilter;
     friend class SwirlFilter;
+
+    friend class PhotoMosaic;
 
 protected:
     int width = 0;

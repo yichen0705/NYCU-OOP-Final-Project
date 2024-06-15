@@ -158,3 +158,7 @@ void ImageLoader::Display_CMD(int width, int height, Color** pixels) {
 
     freeDataRGB(width, height, data);
 }
+
+bool ImageLoader::ListDirectory(std::string directory_path, std::vector<std::string> &filenames) {
+    return data_loader.List_Directory(directory_path, filenames);
+}

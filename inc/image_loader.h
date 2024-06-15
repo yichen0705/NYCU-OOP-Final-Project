@@ -19,6 +19,8 @@ public:
     void Display_ASCII(int width, int height, Color** pixels);
     void Display_CMD(int width, int height, Color** pixels);
 
+    bool ListDirectory(std::string directory_path, std::vector<std::string> &filenames);
+ 
 private:
     ImageLoader() = default;
     Data_Loader data_loader;
