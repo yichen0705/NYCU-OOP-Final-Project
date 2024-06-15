@@ -5,7 +5,10 @@
 
 class RGBImage : public Image {
 public:
+    RGBImage() = default;
+    RGBImage(int width, int height) : Image(width, height) {}
     virtual bool LoadImage(std::string filename);
+    virtual Image* Copy();
 };
 
 #endif

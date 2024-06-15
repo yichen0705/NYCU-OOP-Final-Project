@@ -2,6 +2,25 @@
 
 #include "image_loader.h"
 
+Image::Image(int width, int height) {
+    pixels = new Color*[height];
+    if (pixels == nullptr) {
+        return;
+    }
+
+    for (int i = 0; i < height; i++) {
+        pixels[i] = new Color[width];
+        if (pixels[i] == nullptr) {
+            pixels = nullptr;
+            return;
+        }
+    }
+
+    this->width = width;
+    this->height = height;
+}
+
+
 Image::~Image() {
     if (pixels == nullptr) {
         return;

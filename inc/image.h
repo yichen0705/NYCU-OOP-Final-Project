@@ -7,16 +7,19 @@
 
 #include "color.h"
 
-
+class BlurFilter;
 class InvertFilter;
 
 class Image {
 public:
     Image()=default;
+    Image(int width, int height);
     virtual ~Image();
     
     virtual bool LoadImage(std::string filename) = 0;
-    void DumpImage(std::string filename);
+;   void DumpImage(std::string filename);
+    
+    virtual Image* Copy() = 0;
     
     void Display_X_Server();
     void Display_ASCII();
@@ -25,7 +28,8 @@ public:
     int GetWidth() { return width; }
     int GetHeight() { return height; }
 
-    friend class InvertFilter;    
+    friend class BlurFilter;
+    friend class InvertFilter;
 
 protected:
     int width = 0;

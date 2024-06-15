@@ -11,3 +11,15 @@ bool GrayImage::LoadImage(std::string filename){
     }
     return true;
 }
+
+Image* GrayImage::Copy() {
+    GrayImage* copy = new GrayImage(width, height);
+
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j < width; j++) {
+            copy->pixels[i][j] = pixels[i][j];
+        }
+    }
+
+    return copy;
+}
