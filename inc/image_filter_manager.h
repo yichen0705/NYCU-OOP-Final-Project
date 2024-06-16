@@ -16,15 +16,17 @@ public:
     }
 
     void ApplyFilters(Image* image, uint32_t options);
-    void AddFilter(ImageFilter* filter);
 
 private:
     ImageFilterManager() = default;
+    void AddFilter(ImageFilter* filter);
     std::vector<ImageFilter*> filters;
 
 public:
     ImageFilterManager(ImageFilterManager const&) = delete;
     void operator=(ImageFilterManager const&) = delete;
+
+    friend class ImageFilter;
 };
 
 #endif
