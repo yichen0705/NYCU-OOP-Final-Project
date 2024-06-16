@@ -29,7 +29,7 @@ endif
 .PHONY: all install check clean
 
 # Name of the executable
-TARGET = Image_Processing Image_Mosaic # Data_Loader_Example
+TARGET = Image_Processing Image_Mosaic Image_Demo # Data_Loader_Example
 
 all: $(TARGET)
 
@@ -41,6 +41,10 @@ Image_Processing: image_processing.cpp $(OBJS) $(OBJDIR)/data_loader.o
 	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) $^ -o $@ $(LINKER)
 
 Image_Mosaic: image_mosaic.cpp $(OBJS) $(OBJDIR)/data_loader.o
+	$(VECHO) "	LD\t$@\n"
+	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) $^ -o $@ $(LINKER)
+
+Image_Demo: image_demo.cpp $(OBJS) $(OBJDIR)/data_loader.o
 	$(VECHO) "	LD\t$@\n"
 	$(Q)$(CXX) $(WARNINGS) $(CXXFLAGS) $(OPTFLAGS) $^ -o $@ $(LINKER)
 

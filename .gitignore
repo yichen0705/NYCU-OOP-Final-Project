@@ -4,6 +4,7 @@ third-party/*
 *.png
 obj/*.o
 obj/*.d
+Image_Demo
 Image_Processing
 Image_Mosaic
 Data_Loader_Example
