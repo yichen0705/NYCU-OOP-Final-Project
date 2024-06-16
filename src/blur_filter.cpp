@@ -11,7 +11,7 @@ static BlurFilter blur_filter;
 void BlurFilter::Apply(Image* image) const {
     Image* copy = image->Copy();
 
-    const int kernal = 5;
+    const int kernal = 32;
     const int offset = kernal / 2;
 
     for (int y = 0; y < image->height; y++) {

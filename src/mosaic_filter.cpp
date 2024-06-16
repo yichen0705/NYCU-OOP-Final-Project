@@ -9,7 +9,7 @@ public:
 static MosaicFilter mosaic_filter;
 
 void MosaicFilter::Apply(Image* image) const {
-    const int block_size = 5;
+    const int block_size = 32;
 
     for (int y = 0; y < image->height; y += block_size) {
         for (int x = 0; x < image->width; x += block_size) {
